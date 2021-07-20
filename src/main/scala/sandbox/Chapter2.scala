@@ -128,4 +128,180 @@ object Chapter2 {
    */
   // コンパイルエラー
 
+  // 2.4 Object Literals
+
+  // 2.4.1 Methods
+
+  // 2.4.2 Fields
+
+  // 2.4.3 Methods versus fields
+
+  // 2.4.4 Take home points
+
+  // 2.4.5 Exercises
+
+  // 2.4.5.1 Cat-o-matique
+  /**
+   * 猫の名前、色、好きな食べ物を猫ごとにオブジェクトに定義せよ
+   *
+   * Name      | Colour          | Food
+   * Oswald    | Black           | Milk
+   * Henderson | Ginger          | Chips
+   * Quentin   | Tabby and white | Curry
+   */
+//  object Oswald {
+//    val name = "Oswald"
+//    val colour = "Black"
+//    val food = "Milk"
+//  }
+//  object Henderson {
+//    val name = "Henderson"
+//    val colour = "Ginger"
+//    val food = "Chips"
+//  }
+//  object Quentin {
+//    val name = "Quentin"
+//    val colour = "Tabby and white"
+//    val food = "Curry"
+//  }
+
+  // 2.4.5.2 Square Dance!
+  /**
+   * Doubleを引数として受け入れる関数squareを使用して、calcオブジェクトを定義せよ
+   * squareは入力を2乗する
+   * また、入力squareをキューブ化するcube関数も追加せよ
+   */
+  // 答え見た
+  // squareは解けた
+  // cubeは問題がよく分からなかった
+//  object calc {
+//    def square(d: Double) = d * d
+//    def cube(d: Double) = d * square(d)
+//  }
+
+  // 2.4.5.3 Precise Square Dance!
+  /**
+   * 前の演習のcalcを利用し、IntとDoubleで機能するように一般化されたcalc2を作成せよ
+   */
+  // 答え見た
+  // 単純に2つ書けば良かったのか（オーバーロード）
+//  object calc2 {
+//    def square(value: Double) = value * value
+//    def cube(value: Double) = value * square(value)
+//
+//    def square(value: Int) = value * value
+//    def cube(value: Int) = value * square(value)
+//  }
+
+  // 2.4.5.4 Order of evaluation
+  /**
+   * 以下のプログラムは何を出力し、最終的な式の型と値は何か？
+   *
+   * object argh {
+   *   def a = {
+   *     println("a")
+   *     1
+   *   }
+   *
+   *   val b = {
+   *     println("b")
+   *     a + 2
+   *   }
+   *
+   *   def c = {
+   *     println("c")
+   *     a
+   *     b + "c"
+   *   }
+   * }
+   *
+   * argh.c + argh.b + argh.a
+   */
+//  def main(args: Array[String]): Unit = {
+//    object argh {
+//      def a = {
+//        println("a")
+//        1
+//      }
+//
+//      val b = {
+//        println("b")
+//        a + 2
+//      }
+//
+//      def c = {
+//        println("c")
+//        a
+//        b + "c"
+//      }
+//    }
+//
+//    println(argh.c + argh.b + argh.a)
+//    // println("b")
+//    // println("a")
+//    // println("c")
+//    // println("a")
+//    // println("3c31")
+//
+//    // 間違えた正解は以下
+//    // println("b")
+//    // println("a")
+//    // println("c")
+//    // println("a") -> def cの2行目のaでprintln("a")が実行される
+//    // println("a")
+//    // println("3c31")
+//  }
+
+  // 2.4.5.5 Greetings, human
+  /**
+   * firstNameとlastNameというフィールドを含むpersonオブジェクトを定義せよ
+   * greet関数を含むalienオブジェクトを定義せよ
+   * greet関数はpersonをパラメーターとして受け取り、personのfirstNameを使ってgreetingを返す
+   */
+////  object person {
+////    val firstName = ""
+////    val lastName = ""
+////  }
+////
+////  object alien {
+////    def greet(p: person): Unit = person.firstName
+////  }
+//
+//  // 正解は以下
+//  object person {
+//    val firstName = "Dave"
+//    val lastName = "Gurnell"
+//  }
+//
+//  object alien {
+//    def greet(p: person.type) =
+//      "Greetings, " + p.firstName + " " + p.lastName
+//  }
+
+  // 2.4.5.6 The Value of Methods
+  /**
+   * 関数は値か？式か？なぜそうなるか？
+   */
+  // 値
+  // 正解は以下
+  // 関数の呼び出しは式だが、関数自体は値
+
+  // 2.5 Writing Methods
+
+  // 2.5.1 Identify the Input and Output
+
+  // 2.5.2 Prepare Test Cases
+
+  // 2.5.3 Write the Declaration
+
+  // 2.5.4 Run the Code
+
+  // 2.5.5 Write the Body
+
+  // 2.5.5.1 Consider the Result Type
+
+  // 2.5.5.2 Consider the Input Type
+
+  // 2.5.6 Run the Code, Again
+
 }
