@@ -304,4 +304,43 @@ object Chapter2 {
 
   // 2.5.6 Run the Code, Again
 
+  // 2.6 Compound Expressions
+
+  // 2.6.1 Conditionals
+
+  // 2.6.2 Blocks
+
+  // 2.6.3 Take home points
+
+  // 2.6.4 Exercises
+
+  // 2.6.4.1 A Classic Rivalry
+  /**
+   * 以下の条件の型と値は何か？
+   *
+   * if(1 > 2) "alien" else "predator"
+   */
+  // String型、値は"predator"
+
+  // 2.6.4.2 A Less Well Known Rivalry
+  /**
+   * 以下の条件の型と値は何か？
+   *
+   * if(1 > 2) "alien" else 2001
+   */
+  // Int型、値は2001
+  // 間違えた、正解は以下
+  // Any型、値は2001
+
+  // 2.6.4.3 An if Without an else
+  /**
+   * 以下の条件の型と値は何か？
+   *
+   * if(false) "hello"
+   */
+  // Unit型
+  // 間違えた、正解は以下
+  // Any型、値は()（()はUnit値）
+
+  // 2.7 Conclusion
 }
