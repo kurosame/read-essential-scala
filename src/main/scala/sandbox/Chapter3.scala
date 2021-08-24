@@ -183,4 +183,211 @@ object Chapter3 {
 //    println(new Counter(10).inc(2).dec(3).inc(4).inc().adjust(new Adder(6)).count) // 25
 //  }
 
+  // 3.2 Objects as Functions
+
+  // 3.2.1 The apply method
+  /**
+   * apply関数はオブジェクトを関数のように呼び出すことができる
+   */
+//  class Adder(amount: Int) {
+//    def apply(in: Int): Int = in + amount
+//  }
+//
+//  def main(args: Array[String]): Unit = {
+//    val add3 = new Adder(3)
+//
+//    println(add3.apply(2)) // 5
+//    // applyは省略できる
+//    println(add3(4)) // 7
+//  }
+
+  // 3.2.2 Take home points
+
+  // 3.2.3 Exercises
+
+  // 3.2.3.1 When is a Function not a Function?
+  /**
+   * 関数apply構文は、計算を行うための再利用可能なオブジェクトとしてはどうか？また何が欠けているか
+   */
+  // 答え見た
+  // Adderの型がInt型限定になっており、抽象化されていない
+
+  // 3.3 Companion Object
+  /**
+   * クラスに属しているが、関数を独立させてシングルトンなオブジェクトに定義することができる
+   * これをコンパニオンオブジェクトと呼ぶ
+   * 以下はクラスに複数のコンストラクターを定義したい場合に、コンパニオンオブジェクトにapplyを定義している
+   */
+//  class Timestamp(val seconds: Long)
+//
+//  object Timestamp {
+//    def apply(hours: Int, minutes: Int, seconds: Int): Timestamp =
+//      new Timestamp(hours * 60 * 60 + minutes * 60 + seconds)
+//  }
+
+  /**
+   * Scalaには2つの名前空間があり、それは型と値である
+   * よって、クラスとコンパニオンオブジェクトで同じ名前を付けることが可能
+   */
+
+  // 3.3.1 Take home points
+
+  // 3.3.2 Exercises
+
+  // 3.3.2.1 Friendly Person Factory
+  /**
+   * 名前全体を受け入れるapply関数を含むPersonコンパニオンオブジェクトを実装せよ
+   *
+   * 以下のように文字列を配列に分割できる
+   *
+   * val parts = "John Doe".split(" ")
+   * parts(0)
+   */
+  // 答え見た、問題が読み解けない
+//  class Person(val firstName: String, val lastName: String) {
+//    def name: String = s"$firstName $lastName"
+//  }
+//
+//  object Person {
+//    def apply(name: String): Person = {
+//      val parts = name.split(" ")
+//      new Person(parts(0), parts(1))
+//    }
+//  }
+//
+//  def main(args: Array[String]): Unit = {
+//    println(Person.apply("John Doe").firstName) // John
+//    println(Person("John Doe").firstName) // John
+//    println(Person("John Doe").name) // John Doe
+//  }
+
+  // 3.3.2.2 Extended Body of Work
+  /**
+   * 以下のDirectorとFilmのコンパニオンオブジェクトを実装せよ
+   *
+   * - Director
+   *   - クラスのコンストラクターと同じパラメーターを受け入れ、新しいDirectorを返すapply関数を持つ
+   *   - 2人のDirectorを受け入れ、2人のうち年齢が上の方を返すolder関数を持つ
+   *
+   * - Film
+   *   - クラスのコンストラクターと同じパラメーターを受け入れ、新しいFilmを返すapply関数を持つ
+   *   - 2つのFilmを受け入れ、2つのうち高いimdbRatingを返すhighestRating関数を持つ
+   *   - 2つのFilmを受け入れ、それぞれの撮影時が古い方の監督を返すoldestDirectorAtTheTime関数を持つ
+   */
+//  class Director(val firstName: String, val lastName: String, val yearOfBirth: Int) {}
+//
+//  object Director {
+//    def apply(firstName: String, lastName: String, yearOfBirth: Int) =
+//      new Director(firstName, lastName, yearOfBirth)
+//    // 年齢が同じ場合は？
+//    def older(director1: Director, director2: Director) =
+//      if (director1.yearOfBirth > director2.yearOfBirth) director1 else director2
+//  }
+//
+//  class Film(val name: String, val yearOfRelease: Int, val imdbRating: Double, val director: Director) {}
+//
+//  object Film {
+//    def apply(name: String, yearOfRelease: Int, imdbRating: Double, director: Director) =
+//      new Film(name, yearOfRelease, imdbRating, director)
+//    // imdbRatingが同じ場合は？
+//    def highestRating(film1: Film, film2: Film) =
+//      if (film1.imdbRating > film2.imdbRating) film1 else film2
+//    // yearOfReleaseが同じ場合は？
+//    def oldestDirectorAtTheTime(film1: Film, film2: Film) =
+//      if (film1.yearOfRelease < film2.yearOfRelease) film1.director else film2.director
+//  }
+//
+//  // 以下が答え
+////  class Director(val firstName: String, val lastName: String, val yearOfBirth: Int) {
+////    def name: String = s"$firstName $lastName"
+////
+////    def copy(firstName: String = this.firstName,
+////             lastName: String = this.lastName,
+////             yearOfBirth: Int = this.yearOfBirth
+////    ) = new Director(firstName, lastName, yearOfBirth)
+////  }
+////
+////  object Director {
+////    def apply(firstName: String, lastName: String, yearOfBirth: Int): Director =
+////      new Director(firstName, lastName, yearOfBirth)
+////
+////    def older(director1: Director, director2: Director): Director =
+////      if (director1.yearOfBirth < director2.yearOfBirth) director1 else director2
+////  }
+////
+////  class Film(val name: String, val yearOfRelease: Int, val imdbRating: Double, val director: Director) {
+////    def directorsAge = director.yearOfBirth - yearOfRelease
+////
+////    def isDirectedBy(director: Director) = this.director == director
+////
+////    def copy(name: String = this.name,
+////             yearOfRelease: Int = this.yearOfRelease,
+////             imdbRating: Double = this.imdbRating,
+////             director: Director = this.director
+////    ) = new Film(name, yearOfRelease, imdbRating, director)
+////  }
+////
+////  object Film {
+////    def apply(name: String, yearOfRelease: Int, imdbRating: Double, director: Director): Film =
+////      new Film(name, yearOfRelease, imdbRating, director)
+////
+////    def newer(film1: Film, film2: Film): Film =
+////      if (film1.yearOfRelease < film2.yearOfRelease) film1 else film2
+////
+////    def highestRating(film1: Film, film2: Film): Double = {
+////      val rating1 = film1.imdbRating
+////      val rating2 = film2.imdbRating
+////      if (rating1 > rating2) rating1 else rating2
+////    }
+////
+////    def oldestDirectorAtTheTime(film1: Film, film2: Film): Director =
+////      if (film1.directorsAge > film2.directorsAge) film1.director else film2.director
+////  }
+
+  // 3.3.2.3 Type or Value?
+  /**
+   * 以下は型と値のどちらであるか
+   *
+   * val prestige: Film = bestFilmByChristopherNolan()
+   */
+  // 答え見た
+  // 型、Film型を返しているから
+
+  /**
+   * 以下は型と値のどちらであるか
+   *
+   * new Film("Last Action Hero", 1993, mcTiernan)
+   */
+  // 型、Filmをnewしているから
+
+  /**
+   * 以下は型と値のどちらであるか
+   *
+   * Film("Last Action Hero", 1993, mcTiernan)
+   */
+  // 型
+  // 間違い、正解は以下
+  // 値、これはFilm.applyの省略形で関数だから
+
+  /**
+   * 以下は型と値のどちらであるか
+   *
+   * Film.newer(highPlainsDrifter, thomasCrownAffair)
+   */
+  // 値、Filmのnewerは関数だから
+
+  /**
+   * 以下は型と値のどちらであるか
+   *
+   * Film.type
+   */
+  // 型
+  // 間違い、正解は以下
+  // 値、Film.typeは自体は値、Film.typeの結果は型みたいな？
+
+  /**
+   * 【考察】
+   * 全体的に値を返すものはシングルトンオブジェクトで定義して、型を返すものはクラスに定義するのが良さそう
+   */
+
 }
