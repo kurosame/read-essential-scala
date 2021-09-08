@@ -390,4 +390,160 @@ object Chapter3 {
    * 全体的に値を返すものはシングルトンオブジェクトで定義して、型を返すものはクラスに定義するのが良さそう
    */
 
+  // 3.4 Case Classes
+  /**
+   * ケースクラスを宣言すると、Scalaはクラスとコンパニオンオブジェクトを自動的に生成する
+   */
+//  case class Person(firstName: String, lastName: String) {
+//    def name = firstName + " " + lastName
+//  }
+//
+//  // Personクラス
+//  val dave = new Person("Dave", "Gurnell")
+//
+//  // Personコンパニオンオブジェクト
+//  Person
+
+  // 3.4.1 Features of a case class
+
+  // 3.4.2 Features of a case class companion object
+
+  // 3.4.3 Case objects
+//  case object Citizen {
+//    def firstName = "John"
+//    def lastName = "Doe"
+//    def name = firstName + " " + lastName
+//  }
+
+  // 3.4.4 Take Home Points
+
+  // 3.4.5 Exercises
+
+  // 3.4.5.1 Case Cats
+  /**
+   * それぞれString型のcolourとfoodを持つCatケースクラスを作成せよ
+   */
+//  case class Cat(colour: String, food: String)
+
+  // 3.4.5.2 Roger Ebert Said it Best…
+  /**
+   * DirectorとFilmのケースクラスを作成せよ
+   */
+  // 答え見た
+//  case class Director(firstName: String, lastName: String, yearOfBirth: Int) {
+//    def name: String = s"$firstName $lastName"
+//  }
+//
+//  object Director {
+//    def older(director1: Director, director2: Director): Director =
+//      if (director1.yearOfBirth < director2.yearOfBirth) director1 else director2
+//  }
+//
+//  case class Film(name: String, yearOfRelease: Int, imdbRating: Double, director: Director) {
+//    def directorsAge = yearOfRelease - director.yearOfBirth
+//    def isDirectedBy(director: Director) = this.director == director
+//  }
+//
+//  object Film {
+//    def newer(film1: Film, film2: Film): Film =
+//      if (film1.yearOfRelease < film2.yearOfRelease) film1 else film2
+//
+//    def highestRating(film1: Film, film2: Film): Double = {
+//      val rating1 = film1.imdbRating
+//      val rating2 = film2.imdbRating
+//      if (rating1 > rating2) rating1 else rating2
+//    }
+//
+//    def oldestDirectorAtTheTime(film1: Film, film2: Film): Director =
+//      if (film1.directorsAge > film2.directorsAge) film1.director else film2.director
+//  }
+
+  // 3.4.5.3 Case Class Counter
+  /**
+   * copy関数を使ってCounterケースクラスを再実装せよ
+   * また、countをデフォルト値の0に初期化せよ
+   */
+  // 答え見た
+//  case class Counter(count: Int = 0) {
+//    def dec = copy(count = count - 1)
+//    def inc = copy(count = count + 1)
+//  }
+
+  // 3.4.5.4 Application, Application, Application
+  /**
+   * 前のセクションのPersonクラスをケースクラスに変換せよ
+   * その際にapply関数を持つコンパニオンオブジェクトがあることを確認せよ
+   * （ケースクラスを作成するとコンパニオンオブジェクトが自動的に作られる）
+   */
+  // 答え見た
+//  case class Person(firstName: String, lastName: String) {
+//    def name = firstName + " " + lastName
+//  }
+//
+//  object Person {
+//    def apply(name: String): Person = {
+//      val parts = name.split(" ")
+//      apply(parts(0), parts(1))
+//    }
+//  }
+
+  // 3.5 Pattern Matching
+
+  // 3.5.1 Pattern Syntax
+
+  // 3.5.2 Take Home Points
+
+  // 3.5.3 Exercises
+
+  // 3.5.3.1 Feed the Cats
+  /**
+   * willServe関数を持つChipShopオブジェクトを定義せよ
+   * この関数は、Catを引数にとり、猫の好きな食べ物がチップスの場合trueを返し、それ以外はfalseを返す
+   * その実装はパターンマッチングを使用せよ
+   */
+//  class Cat(val name: String, val colour: String, val food: String)
+//
+//  object ChipShop {
+//    def willServe(c: Cat) = c.food match {
+//      case "Chips" => true
+//      case _       => false
+//    }
+//  }
+//
+//  // 模範解答は以下
+////  object ChipShop {
+////    def willServe(cat: Cat): Boolean =
+////      cat match {
+////        case Cat(_, _, "Chips") => true
+////        case Cat(_, _, _)       => false
+////      }
+////  }
+
+  // 3.5.3.2 Get Off My Lawn!
+  /**
+   * Doubleを返すrate関数を持つDadオブジェクトをパターンマッチングで実装せよ
+   * rate関数はFilmを引数にとり、Clint Eastwoodの映画は10.0、John McTiernanは7.0、それ以外は3.0を返す
+   */
+//  class Film(val name: String, val yearOfRelease: Int, val imdbRating: Double, val director: Director)
+//
+//  object Dad {
+//    def rate(f: Film) = f.name match {
+//      case "Clint Eastwood" => 10.0
+//      case "John McTiernan" => 7.0
+//      case _                => 3.0
+//    }
+//  }
+//
+//  // 模範解答は以下
+////  // nameは映画名だった、Directorに監督名を保持してる
+////  object Dad {
+////    def rate(film: Film): Double =
+////      film match {
+////        case Film(_, _, _, Director("Clint", "Eastwood", _)) => 10.0
+////        case Film(_, _, _, Director("John", "McTiernan", _)) => 7.0
+////        case _                                               => 3.0
+////      }
+////  }
+
+  // 3.6 Conclusions
 }
